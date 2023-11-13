@@ -1,4 +1,5 @@
-#logosig-icon, .logosig-icon {
+#logosig-icon,
+.logosig-icon {
   position: fixed;
   bottom: 0;
   right: 0;
@@ -32,7 +33,6 @@ hr {
   margin-top: 30px;
   margin-bottom: 25px;
 }
-
 
 div.slide.titlepage h1.title {
   font-weight: 700;
@@ -200,7 +200,6 @@ div.slide.titlepage .icons img {
   padding-bottom: 1em;
 }
 
-
 .slide .container header h1 {
   max-width: 100%;
   letter-spacing: -2px;
@@ -234,13 +233,14 @@ div.slide.titlepage .icons img {
 
 .slide .container .content img {
   max-width: 100%;
+  min-width: 80%;
 }
 
 .slide .container .content a:link,
 .slide .container .content a:hover,
 .slide .container .content a:visited {
   text-decoration: underline !important;
-  color: #2997FF !important;
+  color: #2997ff !important;
 }
 
 .slide .container code {
@@ -250,7 +250,7 @@ div.slide.titlepage .icons img {
   font-family: Kode Mono, monospace;
   font-size: 100%;
   padding: 1px 8px;
-  background-color: rgb(134,23,150, 0.2);
+  background-color: rgb(134, 23, 150, 0.2);
   border-radius: 8px;
 }
 
@@ -281,7 +281,7 @@ div.slide.titlepage .icons img {
 }
 
 .slide .container .content h2:not(:first-child) {
-  margin-top: 70px !important
+  margin-top: 70px !important;
 }
 
 .slide .container .content p,
@@ -303,43 +303,112 @@ div.slide.titlepage .icons img {
 }
 
 .slide .container .content {
-    -ms-overflow-style: none;  /* Internet Explorer 10+ */
-    scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
 }
 
 .slide .container .content::-webkit-scrollbar {
-    display: none;  /* Safari and Chrome */
+  display: none; /* Safari and Chrome */
 }
 
-code span.al { color: #FF3338; font-weight: bold; } /* Alert red 60 */
-code span.an { color: #CBFFB3; font-weight: bold; font-style: italic; } /* Annotation green 30 */
-code span.at { color: #CCE6FF; } /* Attribute blue 30 */
-code span.bn { color: #B1FA8F; } /* BaseN green 40 */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #FFC670; font-weight: bold; } /* ControlFlow yellow 40 */
-code span.ch { color: #C2E1FF; } /* Char blue 40 */
-code span.cn { color: #FFE7C2; } /* Constant yellow 20 */
-code span.co { color: #CACBCE; font-style: italic; } /* Comment gray 30 */
-code span.cv { color: #CACBCE; font-weight: bold; font-style: italic; } /* CommentVar gray 30 */
-code span.do { color: #FFA8B0; font-style: italic; } /* Documentation red 40 */
-code span.dt { color: #FFD799; } /* DataType yellow 30 */
-code span.dv { color: #CCE6FF; } /* DecVal  blue 30*/
-code span.er { color: #FF3338; font-weight: bold; } /* Error red 60 */
-code span.ex { } /* Extension */
-code span.fl { color: #CCE6FF; } /* Float */
-code span.fu { color: #CBFFB3; } /* Function green 30 */
-code span.im { } /* Import */
-code span.in { color: #C2E1FF; font-weight: bold; font-style: italic; } /* Information blue 40 */
-code span.kw { color: #DBA3FF; font-weight: bold; } /* Keyword purple 30 */
-code span.op { color: #FFD799; } /* Operator yellow 30 */
-code span.ot { color: #9EF273; } /* Other green 50 */
-code span.pp { color: #FFC670; } /* Preprocessor yellow 40 */
-code span.sc { color: #75BCFF; } /* SpecialChar blue 50 */
-code span.ss { color: #F962BB; } /* SpecialString pink 50 */
-code span.st { color: #FCB0DC; } /* String yellow 30 */
-code span.va { color: #C2E1FF; } /* Variable blue 40 */
-code span.vs { color: #FFC670; } /* VerbatimString yellow 40 */
-code span.wa { color: #FFB23D; font-weight: bold; font-style: italic; } /* Warning yellow 50 */
+code span.al {
+  color: #ff3338;
+  font-weight: bold;
+} /* Alert red 60 */
+code span.an {
+  color: #cbffb3;
+  font-weight: bold;
+  font-style: italic;
+} /* Annotation green 30 */
+code span.at {
+  color: #cce6ff;
+} /* Attribute blue 30 */
+code span.bn {
+  color: #b1fa8f;
+} /* BaseN green 40 */
+code span.bu {
+} /* BuiltIn */
+code span.cf {
+  color: #ffc670;
+  font-weight: bold;
+} /* ControlFlow yellow 40 */
+code span.ch {
+  color: #c2e1ff;
+} /* Char blue 40 */
+code span.cn {
+  color: #ffe7c2;
+} /* Constant yellow 20 */
+code span.co {
+  color: #cacbce;
+  font-style: italic;
+} /* Comment gray 30 */
+code span.cv {
+  color: #cacbce;
+  font-weight: bold;
+  font-style: italic;
+} /* CommentVar gray 30 */
+code span.do {
+  color: #ffa8b0;
+  font-style: italic;
+} /* Documentation red 40 */
+code span.dt {
+  color: #ffd799;
+} /* DataType yellow 30 */
+code span.dv {
+  color: #cce6ff;
+} /* DecVal  blue 30*/
+code span.er {
+  color: #ff3338;
+  font-weight: bold;
+} /* Error red 60 */
+code span.ex {
+} /* Extension */
+code span.fl {
+  color: #cce6ff;
+} /* Float */
+code span.fu {
+  color: #cbffb3;
+} /* Function green 30 */
+code span.im {
+} /* Import */
+code span.in {
+  color: #c2e1ff;
+  font-weight: bold;
+  font-style: italic;
+} /* Information blue 40 */
+code span.kw {
+  color: #dba3ff;
+  font-weight: bold;
+} /* Keyword purple 30 */
+code span.op {
+  color: #ffd799;
+} /* Operator yellow 30 */
+code span.ot {
+  color: #9ef273;
+} /* Other green 50 */
+code span.pp {
+  color: #ffc670;
+} /* Preprocessor yellow 40 */
+code span.sc {
+  color: #75bcff;
+} /* SpecialChar blue 50 */
+code span.ss {
+  color: #f962bb;
+} /* SpecialString pink 50 */
+code span.st {
+  color: #fcb0dc;
+} /* String yellow 30 */
+code span.va {
+  color: #c2e1ff;
+} /* Variable blue 40 */
+code span.vs {
+  color: #ffc670;
+} /* VerbatimString yellow 40 */
+code span.wa {
+  color: #ffb23d;
+  font-weight: bold;
+  font-style: italic;
+} /* Warning yellow 50 */
 
 /* line numbers */
 pre.numberSource > code.sourceCode > span > a:first-child::before {

@@ -1,40 +1,54 @@
 ---
-title-prefix: Kadena-themed
-title:  Styled Pandoc Presentation Template
-author: tasos@kadena.io isa@kadena.io
-date: September 13, 2023
-background: assets/images/bg.png                # image background; used if video is not present or slide_bg_is_video is not true
+title-prefix: WebAuthn
+title: How WebAuthn helps secure and improve User Experience
+author: andy@kadena.io
+date: November 22, 2023
+background: assets/images/bg.png # image background; used if video is not present or slide_bg_is_video is not true
 logosig: assets/icons/k-internal-icon-alpha.png # "signature" logo at bottom right of each slide. to disable this, set to a 1x1 transparent png
-icons:                                          # icon sources for title slide
+icons: # icon sources for title slide
   - assets/icons/k-internal-icon.jpg
-video:                                          # video for background. multiple formats are supported
+video: # video for background. multiple formats are supported
   - src: assets/videos/kd-back.mp4
     type: video/mp4
-video_playback_rate: 0.5                        # slow down the video
-slide_bg_is_video: true                         # true to use a darkened version of the video as slide background
+video_playback_rate: 0.5 # slow down the video
+slide_bg_is_video: true # true to use a darkened version of the video as slide background
 ---
 
-# Styled Pandoc Presentation Template
+# Password
 
-Create Kadena-themed presentations from markdown using pandoc
+:::::::::::::: {.columns}
+::: {.column width="30%"}
 
-1) Clone repository
-1) Install requirements
-1) run `./gen-watch.sh`
-1) Write your slides in `source.md`
-1) Load `index.html` in a browser
+- Forgotten
+- Leaked
+- Fatigue
 
-Optionally: deploy to github pages.
+:::
+::: {.column width="70%"}
+![](./assets/images/forgot-password.jpg)
+:::
+::::::::::::::
 
-[Repository here](https://github.com/Takadenoshi/pandoc-presentation-template/)
+# Asymetric signing
 
-# Requirements
+```{.mermaid width=100% format=svg theme=dark background=transparent}
+flowchart LR
+  M(message)
+  PrK((private key))
+  S(signature)
+  M --> PrK --> S
+```
 
-- `./gen.sh` requires pandoc.
-    - You can find instructions on installing pandoc on your machine [here](https://pandoc.org/installing.html).
-- `./gen-watch.sh` requires nodemon.
-    - You can install that globally with `npm i -g nodemon` or `yarn global add nodemon`.
-      - Don't have `npm`? You can install [node js](https://nodejs.org/en/download) to get it.
+```{.mermaid width=100% format=svg theme=dark background=transparent}
+flowchart LR
+  M(message)
+  S(signature)
+  PubK((public key))
+  I{verified}
+  M --> PubK
+  S --> PubK
+  PubK --> I
+```
 
 # Running
 
@@ -58,12 +72,12 @@ Aside from those you can also press `v` to hide the video background.
 
 The header of the source markdown file includes the following variables that can be set. Refer to `source.md` contents for an example.
 
-|Name|Description|
-|:----|:-----------|
-|`title`|Presentation title. Ends up in title slide, page title|
-|`title-prefix`|Presentation prefix for html page title|
-|`author`|Ends up in title slide, page meta author|
-|`date`|Ends up in title slide, page meta date|
+| Name           | Description                                            |
+| :------------- | :----------------------------------------------------- |
+| `title`        | Presentation title. Ends up in title slide, page title |
+| `title-prefix` | Presentation prefix for html page title                |
+| `author`       | Ends up in title slide, page meta author               |
+| `date`         | Ends up in title slide, page meta date                 |
 
 # Configuring
 
@@ -71,14 +85,14 @@ The header of the source markdown file includes the following variables that can
 
 The following **optional** metadata can be used to customize the presentation theme.
 
-|Name|Description|
-|:----|:-----------|
-|`background`|image background for presentation if `video` is missing or `slide_bg_is_video` is `false`|
-|`logosig`|"signature" logo at bottom right of each slide|
-|`icons`|List of image sources to show as icons over the title on the title slide.
-|`video`|List of `{.src, .type}` video sources for the background of the title slide (or presentation)|
-|`video_playback_rate`|custom playback rate for the video|
-|`slide_bg_is_video`|`true` to use the video as presentation background, `false` to use image instead|
+| Name                  | Description                                                                                   |
+| :-------------------- | :-------------------------------------------------------------------------------------------- |
+| `background`          | image background for presentation if `video` is missing or `slide_bg_is_video` is `false`     |
+| `logosig`             | "signature" logo at bottom right of each slide                                                |
+| `icons`               | List of image sources to show as icons over the title on the title slide.                     |
+| `video`               | List of `{.src, .type}` video sources for the background of the title slide (or presentation) |
+| `video_playback_rate` | custom playback rate for the video                                                            |
+| `slide_bg_is_video`   | `true` to use the video as presentation background, `false` to use image instead              |
 
 # Configuring
 
@@ -113,9 +127,9 @@ A sample is provided under `/pre-commit.sample` which you can copy to `.git/hook
 
 Deploying this to Github pages is straightforward.
 
-1) (Fork repo, rename, enter your content, etc)
-1) Go to GitHub -> Settings -> Pages
-1) Under "Build and Deployment -> Branch", select `main` and click `Save`.
+1. (Fork repo, rename, enter your content, etc)
+1. Go to GitHub -> Settings -> Pages
+1. Under "Build and Deployment -> Branch", select `main` and click `Save`.
 
 Your presentation will be deployed to the URL:
 
@@ -125,9 +139,9 @@ Your presentation will be deployed to the URL:
 
 If you have moved `index.html` to a subfolder:
 
-1) Edit `/.github/workflows/static.yml`
-1) Locate the `jobs.deploy.steps.Upload artifact` step (should have a comment "Upload entire repository".)
-1) Replace `path` with the path to your document root.
+1. Edit `/.github/workflows/static.yml`
+1. Locate the `jobs.deploy.steps.Upload artifact` step (should have a comment "Upload entire repository".)
+1. Replace `path` with the path to your document root.
 
 # Writing pandoc slides
 
@@ -194,7 +208,9 @@ Produces:
 
 :::::::::::::: {.columns}
 ::: {.column width="70%"}
+
 ## large content to the left
+
 :::
 ::: {.column width="30%"}
 small content to the right
@@ -210,3 +226,7 @@ The usual markdown for a ruler `---` denotes "new slide" in pandoc
 You can insert a horizontal ruler / HR by using the html tag: `<hr />`
 
 <hr />
+
+# Credits
+
+[Image by storyset](https://www.freepik.com/free-vector/forgot-password-concept-illustration_7070629.htm#query=reset%20password&position=1&from_view=keyword&track=ais)
