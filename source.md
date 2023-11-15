@@ -50,6 +50,20 @@ flowchart LR
   PubK --> I
 ```
 
+# Password exposure (Submit)
+
+```{.mermaid width=100% format=svg theme=dark background=transparent}
+journey
+  title Login flow
+  section User laptop
+    Navigate to website: 5: password
+    Enter username + password: 3: password
+    Submit form: 1: password
+  section Server
+    Lookup user details: 2: password
+    Verify credentials: 2: password
+```
+
 # Running
 
 Running `./gen.sh` will rebuild the target `index.html`.
