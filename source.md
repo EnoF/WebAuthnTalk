@@ -29,6 +29,20 @@ slide_bg_is_video: true # true to use a darkened version of the video as slide b
 :::
 ::::::::::::::
 
+# Password exposure
+
+```{.mermaid width=100% format=svg theme=dark background=transparent}
+journey
+  title Login flow
+  section User laptop
+    Navigate to website: 5: security
+    Enter username + password: 3: security
+    Submit form: 1: security
+  section Server
+    Lookup user details: 2: security
+    Verify credentials: 2: security
+```
+
 # Asymetric signing
 
 ```{.mermaid width=100% format=svg theme=dark background=transparent}
@@ -50,197 +64,193 @@ flowchart LR
   PubK --> I
 ```
 
-# Password exposure (Submit)
+# Asymetric signing exposure
 
 ```{.mermaid width=100% format=svg theme=dark background=transparent}
 journey
-  title Login flow
+  title Sign flow
   section User laptop
-    Navigate to website: 5: password
-    Enter username + password: 3: password
-    Submit form: 1: password
+    Navigate to website: 5: security
+    Enter password to unlock store: 3: security
+    Sign message: 4: security
+    Send signature: 4: security
   section Server
-    Lookup user details: 2: password
-    Verify credentials: 2: password
+    Lookup user details: 4: security
+    Verify credentials: 4: security
 ```
 
-# Running
-
-Running `./gen.sh` will rebuild the target `index.html`.
-
-Running `./gen-watch.sh` will watch the current directory for changes to `.md` or `.slidy` files and run `gen.sh` when any change is detected.
-
-Running `./gen-standalone.sh` will create a standalone index.html with all resources inlined, which can be shared as-is.
-
-# Presenting
-
-Pandoc supports some keyboard shortcuts while presenting, like `s` for smaller font size, `b` for larger, `k` to disable click-to-forward, `c` for a table of contents, etc.
-
-Press `h` while on the presentation to show a detailed help screen.
-
-Aside from those you can also press `v` to hide the video background.
-
-# Configuring
-
-## Markdown metadata (1)
-
-The header of the source markdown file includes the following variables that can be set. Refer to `source.md` contents for an example.
-
-| Name           | Description                                            |
-| :------------- | :----------------------------------------------------- |
-| `title`        | Presentation title. Ends up in title slide, page title |
-| `title-prefix` | Presentation prefix for html page title                |
-| `author`       | Ends up in title slide, page meta author               |
-| `date`         | Ends up in title slide, page meta date                 |
-
-# Configuring
-
-## Markdown metadata (2)
-
-The following **optional** metadata can be used to customize the presentation theme.
-
-| Name                  | Description                                                                                   |
-| :-------------------- | :-------------------------------------------------------------------------------------------- |
-| `background`          | image background for presentation if `video` is missing or `slide_bg_is_video` is `false`     |
-| `logosig`             | "signature" logo at bottom right of each slide                                                |
-| `icons`               | List of image sources to show as icons over the title on the title slide.                     |
-| `video`               | List of `{.src, .type}` video sources for the background of the title slide (or presentation) |
-| `video_playback_rate` | custom playback rate for the video                                                            |
-| `slide_bg_is_video`   | `true` to use the video as presentation background, `false` to use image instead              |
-
-# Configuring
-
-In case you need to tweak the generated html or stylesheets:
-
-## Slidy template
-
-The js slideshow library used is `slidy`.
-
-The template file which generates the html is `assets/kadena.slidy`.
-
-## Stylesheets
-
-CSS stylesheets can be tweaked under `assets/styles/`.
-
-If you want to pick different colors or tones, please consult the [Color System](https://www.figma.com/file/cNQkFOjrqO3PAYv7TSIhpB/Foundation?type=design&node-id=188-869&mode=design&t=5J7YpU6yxy8El0DC-0).
-
-# Pre-commit hook
-
-If you need to make sure your `index.html` is up to date with your source, you can use a pre-commit hook like this:
-
-```{.bash .numberLines}
-#!/usr/bin/env sh
-
-./gen.sh
-git add index.html
-```
-
-A sample is provided under `/pre-commit.sample` which you can copy to `.git/hooks/pre-commit`
-
-# Deploying to Github pages
-
-Deploying this to Github pages is straightforward.
-
-1. (Fork repo, rename, enter your content, etc)
-1. Go to GitHub -> Settings -> Pages
-1. Under "Build and Deployment -> Branch", select `main` and click `Save`.
-
-Your presentation will be deployed to the URL:
-
-`https://<GitHub Username>.github.io/<Repo Name>`
-
-<hr />
-
-If you have moved `index.html` to a subfolder:
-
-1. Edit `/.github/workflows/static.yml`
-1. Locate the `jobs.deploy.steps.Upload artifact` step (should have a comment "Upload entire repository".)
-1. Replace `path` with the path to your document root.
-
-# Writing pandoc slides
-
-The full pandoc markdown reference can be found [here](https://pandoc.org/MANUAL.html#pandocs-markdown).
-
-## Slides and headings
-
-Slides are separated by H1 headings `# My next Slide` or three dashes `---`.
-
-# Writing pandoc slides
-
-## Code blocks, no line numbers
-
-Code blocks can have syntax highlighting, e.g.:
-
-    ` ` ` javascript
-    console.log("very nice");
-    ` ` `
-
-Produces:
-
-```javascript
-console.log("very nice");
-```
-
-_Note: the backticks above had to be spaced for font rendering purposes. Do not include spaces between backticks in your code._
-
-# Writing pandoc slides
-
-## Code blocks, with line numbers
-
-If you need line numbers in code blocks, use this invocation:
-
-    ` ` ` {.javascript .numberLines}
-    console.log("very");
-    console.log("nice");
-    ` ` `
-
-Produces:
-
-```{.javascript .numberLines}
-console.log("very");
-console.log("nice");
-```
-
-_Note: the backticks above had to be spaced for font rendering purposes. Do not include spaces between backticks in your code._
-
-# Writing pandoc slides
-
-## Columns
-
-To split a slide in two or more columns, you can use this markdown:
-
-    :::::::::::::: {.columns}
-    ::: {.column width="80%"}
-    ## large content to the left
-    :::
-    ::: {.column width="20%"}
-    small content to the right
-    :::
-    ::::::::::::::
-
-Produces:
+# Registration
 
 :::::::::::::: {.columns}
-::: {.column width="70%"}
+::: {.column width="30%"}
 
-## large content to the left
+- Privacy
+- Tedious
+- Trust
 
 :::
-::: {.column width="30%"}
-small content to the right
+::: {.column width="70%"}
+![](./assets/images/leap.jpg)
 :::
 ::::::::::::::
 
-# Writing pandoc slides
+# Password exposure
 
-## HRs
+```{.mermaid width=100% format=svg theme=dark background=transparent}
+journey
+  title Registration flow
+  section User laptop
+    Navigate to website: 5: security
+    Enter username + password: 3: security
+    Submit form: 1: security
+```
 
-The usual markdown for a ruler `---` denotes "new slide" in pandoc
+# Password exposure
 
-You can insert a horizontal ruler / HR by using the html tag: `<hr />`
+```{.mermaid width=100% format=svg theme=dark background=transparent}
+journey
+  title Registration flow
+  section Server
+    Hash user password: 2: security
+    Store user details: 2: security
+    Send confirmation email: 2: security
+  section User laption
+    Click on confirmation link: 1: security
+```
 
-<hr />
+# Wallet registration
 
-# Credits
+:::::::::::::: {.columns}
+::: {.column width="30%"}
 
-[Image by storyset](https://www.freepik.com/free-vector/forgot-password-concept-illustration_7070629.htm#query=reset%20password&position=1&from_view=keyword&track=ais)
+More secure, but still...
+
+- Tedious
+- Trust
+
+:::
+::: {.column width="70%"}
+![](./assets/images/wallet.webp)
+:::
+::::::::::::::
+
+# Wallet registration
+
+```{.mermaid width=100% format=svg theme=dark background=transparent}
+journey
+  title Registration flow
+  section User laptop
+    Navigate to wallet: 5: security
+    Generate mnemonics: 5: security
+  section Multiple pieces of paper
+    Store mnemonics: 4: security
+```
+
+# Wallet registration
+
+```{.mermaid width=100% format=svg theme=dark background=transparent}
+journey
+  title Registration flow
+  section User laptop
+    Enter (partial) mnemonics: 4: security
+    Enter password: 3: security
+    Generate keypairs: 4: security
+    Submit public key: 5: security
+  section Server
+    Store public key: 5: security
+```
+
+# WebAuthn
+
+```{.mermaid width=100% format=svg theme=dark background=transparent}
+journey
+  title Registration flow
+  section User laptop
+    Navigate to wallet website: 5: security
+    Pair device with wallet: 5: security
+  section Phone
+    Request permission: 5: security
+    Approve with biometrics: 5: security
+  section SE/TEE
+    Generate keypair: 5: security
+```
+
+# WebAuthn
+
+```{.mermaid width=100% format=svg theme=dark background=transparent}
+journey
+  title Registration flow
+  section User laptop
+    Register device info: 5: security
+  section Phone
+    Approve with biometrics: 5: security
+  section SE/TEE
+    Sign device info: 5: security
+  section User laptop
+    Submit device info: 5: security
+  section Blockchain
+    Store device info: 5: security
+```
+
+# WebAuthn
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+
+- Secure Enclave/Trusted Execution Environment
+- No more forgotten passwords
+- No more passwords leaked
+- Easy to access
+
+Lost or broken device?
+
+:::
+::: {.column width="50%"}
+![](./assets/images/broken-phone.png)
+:::
+::::::::::::::
+
+# Passkeys
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+
+- Extention on top of WebAuthn
+- Defaults to Google/iCloud
+- Allows 3rd party storage
+
+:::
+::: {.column width="50%"}
+![](./assets/images/passkeys-hero.jpg)
+:::
+::::::::::::::
+
+# Register Demo
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+
+Register now and get a 10 KDA welcome bonus!
+
+:::
+::: {.column width="50%"}
+![](./assets/images/register.svg)
+:::
+::::::::::::::
+
+#
+
+![](./assets/videos/web-auth-n.mp4){style="object-fit: contain; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0;" autoplay="autoplay"}
+
+# Webshop Demo
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+
+Order your cookie now with WebAuthn!
+
+:::
+::: {.column width="50%"}
+![](./assets/images/webshop.svg)
+:::
+::::::::::::::
