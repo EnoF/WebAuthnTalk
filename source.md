@@ -31,17 +31,18 @@ slide_bg_is_video: true # true to use a darkened version of the video as slide b
 
 # Password exposure
 
-```{.mermaid width=100% format=svg theme=dark background=transparent}
-journey
-  title Login flow
-  section User laptop
-    Navigate to website: 5: security
-    Enter username + password: 3: security
-    Submit form: 1: security
-  section Server
-    Lookup user details: 2: security
-    Verify credentials: 2: security
-```
+:::::::::::::: {.columns}
+::: {.column width="30%"}
+
+- Entering password
+- Sending password
+- Storing password
+
+:::
+::: {.column width="70%"}
+![](./assets/images/phishing.jpg)
+:::
+::::::::::::::
 
 # Asymetric signing
 
@@ -67,129 +68,48 @@ flowchart LR
 # Asymetric signing exposure
 
 ```{.mermaid width=100% format=svg theme=dark background=transparent}
-journey
-  title Sign flow
-  section User laptop
-    Navigate to website: 5: security
-    Enter password to unlock store: 3: security
-    Sign message: 4: security
-    Send signature: 4: security
-  section Server
-    Lookup user details: 4: security
-    Verify credentials: 4: security
-```
+flowchart LR
 
-# Registration
+subgraph Website
+  direction TB
+  a(Password Form)
+  c(KeyStore)
+end
 
-:::::::::::::: {.columns}
-::: {.column width="30%"}
+subgraph Server
+  b(Public Key)
+end
 
-- Privacy
-- Tedious
-- Trust
-
-:::
-::: {.column width="70%"}
-![](./assets/images/leap.jpg)
-:::
-::::::::::::::
-
-# Password exposure
-
-```{.mermaid width=100% format=svg theme=dark background=transparent}
-journey
-  title Registration flow
-  section User laptop
-    Navigate to website: 5: security
-    Enter username + password: 3: security
-    Submit form: 1: security
-```
-
-# Password exposure
-
-```{.mermaid width=100% format=svg theme=dark background=transparent}
-journey
-  title Registration flow
-  section Server
-    Hash user password: 2: security
-    Store user details: 2: security
-    Send confirmation email: 2: security
-  section User laption
-    Click on confirmation link: 1: security
-```
-
-# Wallet registration
-
-:::::::::::::: {.columns}
-::: {.column width="30%"}
-
-More secure, but still...
-
-- Tedious
-- Trust
-
-:::
-::: {.column width="70%"}
-![](./assets/images/wallet.webp)
-:::
-::::::::::::::
-
-# Wallet registration
-
-```{.mermaid width=100% format=svg theme=dark background=transparent}
-journey
-  title Registration flow
-  section User laptop
-    Navigate to wallet: 5: security
-    Generate mnemonics: 5: security
-  section Multiple pieces of paper
-    Store mnemonics: 4: security
-```
-
-# Wallet registration
-
-```{.mermaid width=100% format=svg theme=dark background=transparent}
-journey
-  title Registration flow
-  section User laptop
-    Enter (partial) mnemonics: 4: security
-    Enter password: 3: security
-    Generate keypairs: 4: security
-    Submit public key: 5: security
-  section Server
-    Store public key: 5: security
+a --Unlock Keystore--> c
+c --Signs message--> a
+Server --Sign this message--> Website
+Website --Sends signature--> Server
 ```
 
 # WebAuthn
 
 ```{.mermaid width=100% format=svg theme=dark background=transparent}
-journey
-  title Registration flow
-  section User laptop
-    Navigate to wallet website: 5: security
-    Pair device with wallet: 5: security
-  section Phone
-    Request permission: 5: security
-    Approve with biometrics: 5: security
-  section SE/TEE
-    Generate keypair: 5: security
-```
+flowchart LR
 
-# WebAuthn
+subgraph Client
+  direction TB
+  subgraph SE/TEE
+    c(KeyStore)
+  end
 
-```{.mermaid width=100% format=svg theme=dark background=transparent}
-journey
-  title Registration flow
-  section User laptop
-    Register device info: 5: security
-  section Phone
-    Approve with biometrics: 5: security
-  section SE/TEE
-    Sign device info: 5: security
-  section User laptop
-    Submit device info: 5: security
-  section Blockchain
-    Store device info: 5: security
+  subgraph Website
+  end
+end
+
+subgraph Server
+  b(Public Key)
+end
+
+c --Signs message--> c
+Website --Sign this message--> SE/TEE
+SE/TEE --Sends signature--> Website
+Server --Sign this message--> Website
+Website --Sends signature--> Server
 ```
 
 # WebAuthn
