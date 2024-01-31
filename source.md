@@ -1,12 +1,12 @@
 ---
 title-prefix: WebAuthn
-title: How WebAuthn helps secure and improve User Experience
+title: Passwordless Innovation for <br> Blockchain Security and User Experience
 author: andy@kadena.io
-date: November 22, 2023
+date: January 31, 2024
 background: assets/images/bg.png # image background; used if video is not present or slide_bg_is_video is not true
-logosig: assets/icons/k-internal-icon-alpha.png # "signature" logo at bottom right of each slide. to disable this, set to a 1x1 transparent png
+logosig: assets/icons/k-logo-icon-alpha.png # "signature" logo at bottom right of each slide. to disable this, set to a 1x1 transparent png
 icons: # icon sources for title slide
-  - assets/icons/k-internal-icon.jpg
+  - assets/icons/k-logo-icon.jpg
 video: # video for background. multiple formats are supported
   - src: assets/videos/kd-back.mp4
     type: video/mp4
@@ -44,7 +44,7 @@ slide_bg_is_video: true # true to use a darkened version of the video as slide b
 :::
 ::::::::::::::
 
-# Asymetric signing
+# Asymmetric signing
 
 ```{.mermaid width=100% format=svg theme=dark background=transparent}
 flowchart LR
@@ -65,7 +65,7 @@ flowchart LR
   PubK --> I
 ```
 
-# Asymetric signing exposure
+# Asymmetric signing exposure
 
 ```{.mermaid width=100% format=svg theme=dark background=transparent}
 flowchart LR
@@ -174,3 +174,8 @@ Order your cookie now with WebAuthn!
 ![](./assets/images/webshop.svg)
 :::
 ::::::::::::::
+
+# Thank you
+
+Andy Tang
+@andortang
